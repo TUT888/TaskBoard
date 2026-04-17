@@ -35,7 +35,7 @@ function App() {
       <section id="content">
         <div>
           <h2>Task List</h2>
-          <TaskList />
+          <TaskList tasks={tasks}/>
         </div>
 
         <div>

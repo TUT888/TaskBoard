@@ -15,7 +15,7 @@ function TaskForm({ onAddTask }: TaskFormProps) {
     onAddTask(title, status);
 
     setTitle("");
-    setStatus("");
+    setStatus("todo");
   };
 
   return (
