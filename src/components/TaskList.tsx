@@ -9,7 +9,7 @@ function TaskList({ tasks, handleDeleteTask }: TaskListProps) {
   return (
     <ul className="task-list">
       {tasks.map((task) => (
-        <li id={String(task.id)}>
+        <li key={String(task.id)}>
           {task.title} - {task.status}
           <button type="button" onClick={() => handleDeleteTask(task.id)}>
             Delete

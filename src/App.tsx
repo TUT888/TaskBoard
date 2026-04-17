@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import TaskSearch from "./components/TaskSearch";
 
 const initialTasks = [
   { id: 1, title: "Learn React", status: "todo" },
@@ -12,6 +13,9 @@ const initialTasks = [
 function App() {
   const [lastId, setLastId] = useState(3);
   const [tasks, setTasks] = useState(initialTasks);
+
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchStatus, setSearchStatus] = useState("all");
 
   const handleAddTask = (title: string, status: string) => {
     const newTask = {
@@ -28,7 +32,12 @@ function App() {
     setTasks(newTaskList);
   };
 
-  console.log(tasks);
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch = task.title.toLowerCase().includes(searchKeyword.toLowerCase());
+    const matchesStatus = searchStatus === "all" || task.status === searchStatus;
+    return matchesSearch && matchesStatus;
+  });
+
   return (
     <>
       <section>
@@ -40,7 +49,13 @@ function App() {
       <section id="content">
         <div>
           <h2>Task List</h2>
-          <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
+          <TaskSearch
+            searchKeyword={searchKeyword}
+            handleKeywordChange={setSearchKeyword}
+            searchStatus={searchStatus}
+            handleStatusChange={setSearchStatus}
+          />
+          <TaskList tasks={filteredTasks} handleDeleteTask={handleDeleteTask} />
         </div>
 
         <div>
