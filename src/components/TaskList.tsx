@@ -1,9 +1,17 @@
-function TaskList() {
+import type { Task } from "../types";
+
+interface TaskListProps {
+  tasks: Task[]
+}
+
+function TaskList({ tasks }: TaskListProps) {
   return (
     <ul className="task-list">
-      <li>Task 1</li>
-      <li>Task 2</li>
-      <li>Task 3</li>
+      {tasks.map((task) => (
+        <li id={String(task.id)}>
+          {task.title} - {task.status}
+        </li>
+      ))}
     </ul>
   );
 }
