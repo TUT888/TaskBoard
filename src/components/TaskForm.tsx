@@ -2,17 +2,17 @@ import type React from "react";
 import { useState } from "react";
 
 interface TaskFormProps {
-  onAddTask: (title: string, status: string) => void;
+  handleAddTask: (title: string, status: string) => void;
 }
 
-function TaskForm({ onAddTask }: TaskFormProps) {
+function TaskForm({ handleAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("todo"); // default is todo
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
 
-    onAddTask(title, status);
+    handleAddTask(title, status);
 
     setTitle("");
     setStatus("todo");
